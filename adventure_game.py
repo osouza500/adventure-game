@@ -73,7 +73,16 @@ def saloon():
         if "gun" not in items:
             print_pause("The bouncer looks at you and tells you "
                         "need a gun in order to access the saloon. "
-                        "Are you crazy?")
+                        "Have you lost your mind?")
+            main_street()            
+        else:
+            print_pause("You enter the saloon.")
+            print_pause("The place is crowded with crooks.")
+            print_pause("One of them challenges you to a duel.")
+            print_pause("\nEnter 1 to accept.")
+            print_pause("Enter 2 to decline.")
+            print_pause("What will you do?")
+            response = input("(Please enter 1 or 2.)")
     
 
 intro()
