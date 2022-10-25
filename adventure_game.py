@@ -20,19 +20,19 @@ def intro(items):
                 "through the desert.")
     main_street(items)
 
-def continue_quit():
+def continue_quit(items):
     print_pause("Would you like to play again?")
     print_pause("\nEnter 1 if you want to play again.")
     print_pause("Enter 2 if you want to quit.")
     print("What will you do?")
     response = input("(Please enter 1 or 2.)\n")
     if response == "1":
-        intro()
+        intro(items)
     elif response == "2":
         print_pause("Good bye!")
     else:
         print_pause("Please enter a valid number.")
-        continue_quit()
+        continue_quit(items)
 
 def main_street(items):
     print_pause("You are in the main street.")
@@ -120,32 +120,31 @@ def gunshop(items):
         gunshop(items)
 
 def saloon(items):
-    duel_result = ["win", "lose"]
+    duel_result = random.choice(["win", "lose"])
     if "gun" not in items:
         print_pause("The bouncer looks at you and tells you "
                     "that you need a gun in order to access the "
                     "saloon.")
         print_pause("Have you lost your mind?")
         main_street(items)            
-    elif "gun" in items:
+    if "gun" in items:
         print_pause("The place is crowded with crooks.")
         print_pause("One of them challenges you to a duel.")
         print_pause("\nEnter 1 to accept.")
         print_pause("Enter 2 to decline.")
         print("What will you do?")
         response = input("(Please enter 1 or 2.)\n")
-        if response == "1" and random.choice(duel_result) == "win":
-            print_pause("Your draw your gun...")
+        if response == "1":
+            print_pause("You draw your gun...")
             print_pause("...")
-            print_pause("... and quickly shot the man dead.")
-            print_pause("Congratulations... you won the game!")
-            continue_quit()
-        elif response == "1" and random.choice(duel_result) == "lose":
-            print_pause("Your draw your gun...")
-            print_pause("...")
-            print_pause("... but you can't do it in time.")
-            print_pause("You are dead. Game over!")
-            continue_quit()
+            if duel_result == "win":
+                print_pause("... and quickly shot the man dead.")
+                print_pause("Congratulations... you won the game!")
+                continue_quit(items)
+            elif duel_result == "lose":
+                print_pause("... but you can't do it in time.")
+                print_pause("You are dead. Game over!")
+                continue_quit(items)
         elif response == "2":
             print_pause("The crook laughs at you.")
             print_pause("You leave the saloon demoralized.")
